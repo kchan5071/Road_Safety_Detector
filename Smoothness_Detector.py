@@ -24,5 +24,8 @@ def get_smoothness(image):
     #calculate laplacian
     laplacian = cv2.Laplacian(blur, cv2.CV_64F)
     #calculate variance
-    variance = laplacian.var()
+    #ignore all alpha = 0 pixels
+    laplacian = laplacian[laplacian != 0]
+    variance = np.var(laplacian)
+
     return variance
